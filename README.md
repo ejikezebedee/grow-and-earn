@@ -1,73 +1,113 @@
-# Welcome to your Lovable project
+# AffiliateHub - Complete Affiliate Marketing Platform
 
-## Project info
+A production-ready affiliate marketing platform built with React, TypeScript, Supabase, and TailwindCSS.
 
-**URL**: https://lovable.dev/projects/bb9dfa34-f6ca-4fac-b8e4-8bfc10faf67f
+## 🚀 Features
 
-## How can I edit this code?
+### ✅ Core Features Implemented
+- **Authentication**: Email/password + role-based access (Admin, Affiliate, Advertiser)
+- **Affiliate System**: Unique referral links, click/conversion tracking, earnings dashboard
+- **Campaign Management**: Create and join campaigns with commission tracking
+- **Wallet System**: Earnings tracking, transaction history, payout requests
+- **Blog System**: SEO-friendly blog with individual post pages
+- **Edge Functions**: Real-time tracking APIs for clicks, conversions, and payouts
 
-There are several ways of editing your application.
+### 🛠️ Tech Stack
+- **Frontend**: React 18 + Vite + TypeScript + TailwindCSS + shadcn/ui
+- **Backend**: Supabase (Database + Auth + Edge Functions)
+- **Database**: PostgreSQL with Row Level Security
+- **Styling**: Custom design system with semantic tokens
 
-**Use Lovable**
+## 🧪 Testing the Platform
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/bb9dfa34-f6ca-4fac-b8e4-8bfc10faf67f) and start prompting.
+### Test User Accounts
+1. **Sign up at `/auth`** - Choose your role (affiliate/advertiser)
+2. **Affiliate Flow**: Join campaigns → Get referral links → Track earnings
+3. **Advertiser Flow**: Create campaigns → Set commissions → Monitor performance
 
-Changes made via Lovable will be committed automatically to this repo.
+### Test Referral Tracking
+- Referral links follow format: `/ref/[8-character-code]`
+- Click tracking works automatically via Edge Functions
+- Conversion tracking can be triggered via API
 
-**Use your preferred IDE**
+### Test Campaigns
+Sample campaigns are available in the database for testing affiliate functionality.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 📊 Database Schema
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Core Tables
+- `profiles` - User profiles with roles and wallet info
+- `campaigns` - Advertiser campaigns with commission settings
+- `referrals` - Unique affiliate referral codes per campaign
+- `clicks` - Click tracking with IP and user agent
+- `conversions` - Conversion events with commission calculations
+- `wallet_transactions` - Earnings, payouts, and transaction history
+- `blog_posts` - Content management for blog system
 
-Follow these steps:
+### Security
+- Row Level Security (RLS) on all tables
+- Role-based access control
+- JWT authentication via Supabase Auth
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🔧 Development
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Local Setup
+```bash
+# Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Environment Variables
+```bash
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Edge Functions
+Located in `supabase/functions/`:
+- `track-click` - Records referral clicks
+- `track-conversion` - Processes conversions and calculates commissions
+- `payout` - Handles affiliate payout processing
 
-**Use GitHub Codespaces**
+## 🚀 Deployment
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+**Frontend**: Deploys automatically via Vercel/Netlify
+**Backend**: Supabase handles database and Edge Functions automatically
 
-## What technologies are used for this project?
+## 📈 Current Status
 
-This project is built with:
+### ✅ Completed
+- Core affiliate tracking system
+- Authentication and user management
+- Campaign browsing and joining
+- Earnings and wallet system
+- Blog with SEO optimization
+- Responsive design system
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### 🔄 Next Phase (Coming Soon)
+- Advertiser dashboard for campaign creation
+- Admin dashboard for user/campaign management
+- Advanced analytics and reporting
+- PayPal integration for automated payouts
+- Fraud detection system
 
-## How can I deploy this project?
+## 🔗 Key Routes
 
-Simply open [Lovable](https://lovable.dev/projects/bb9dfa34-f6ca-4fac-b8e4-8bfc10faf67f) and click on Share -> Publish.
+- `/` - Landing page with featured campaigns
+- `/auth` - Authentication (login/signup)
+- `/blog` - Blog listing and individual posts
+- `/dashboard` - User dashboard (role-specific)
+- `/dashboard/campaigns` - Browse and join campaigns (affiliates)
+- `/dashboard/wallet` - Earnings and payout management (affiliates)
+- `/ref/:code` - Referral link tracking
 
-## Can I connect a custom domain to my Lovable project?
+## 📞 Support
 
-Yes, you can!
+For questions or issues, refer to the troubleshooting documentation or contact support.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+**Project URL**: https://lovable.dev/projects/bb9dfa34-f6ca-4fac-b8e4-8bfc10faf67f

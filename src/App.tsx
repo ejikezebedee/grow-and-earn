@@ -73,35 +73,53 @@ const App = () => (
 
 // Referral redirect component
 const ReferralRedirect = () => {
-  const { refCode } = useParams();
+  const { refCode } = useParams<{ refCode: string }>();
   
   useEffect(() => {
-    if (refCode) {
-      // Track the click
-      fetch(`https://qbpqcxlpgiyietlcadis.supabase.co/functions/v1/track-click/${refCode}`, {
-        method: 'POST',
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.redirectUrl) {
+    const trackAndRedirect = async () => {
+      if (!refCode) {
+        console.log('No referral code provided, redirecting to homepage');
+        window.location.href = '/';
+        return;
+      }
+
+      console.log('Tracking click for referral code:', refCode);
+      
+      try {
+        // Track the click using our Edge Function
+        const response = await fetch(`https://qbpqcxlpgiyietlcadis.supabase.co/functions/v1/track-click/${refCode}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const data = await response.json();
+        console.log('Track click response:', data);
+
+        if (data.success && data.redirectUrl) {
+          console.log('Redirecting to:', data.redirectUrl);
           window.location.href = data.redirectUrl;
         } else {
-          // Fallback to homepage if no redirect URL
+          console.log('No redirect URL provided, going to homepage');
           window.location.href = '/';
         }
-      })
-      .catch(() => {
+      } catch (error) {
+        console.error('Error tracking click:', error);
         // Fallback to homepage on error
         window.location.href = '/';
-      });
-    }
+      }
+    };
+
+    trackAndRedirect();
   }, [refCode]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-        <p>Redirecting...</p>
+      <div className="text-center space-y-4">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+        <p>Tracking your referral...</p>
+        <p className="text-sm text-muted-foreground">You'll be redirected shortly</p>
       </div>
     </div>
   );
