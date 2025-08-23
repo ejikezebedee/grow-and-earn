@@ -1,1 +1,7 @@
 project_id = "qbpqcxlpgiyietlcadis"
+
+[functions.track-click]
+verify_jwt = false
+
+[functions.track-conversion]
+verify_jwt = false

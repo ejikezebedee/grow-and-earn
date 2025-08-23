@@ -37,9 +37,9 @@ const Header = () => {
           <Button variant="ghost" asChild>
             <Link to="/login">Login</Link>
           </Button>
-          <Button variant="hero" asChild>
-            <Link to="/register">Get Started</Link>
-          </Button>
+          <Link to="/auth" className="text-foreground/70 hover:text-foreground transition-colors">
+            Get Started
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -73,9 +73,7 @@ const Header = () => {
               <Button variant="ghost" asChild>
                 <Link to="/login">Login</Link>
               </Button>
-              <Button variant="hero" asChild>
-                <Link to="/register">Get Started</Link>
-              </Button>
+              <Link to="/auth">Get Started</Link>
             </div>
           </nav>
         </div>
