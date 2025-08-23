@@ -13,6 +13,9 @@ import { Auth } from "./pages/Auth";
 import { Blog } from "./pages/Blog";
 import { Campaigns } from "./pages/affiliate/Campaigns";
 import { Wallet } from "./pages/affiliate/Wallet";
+import { CreateCampaign } from "./pages/advertiser/CreateCampaign";
+import { Campaigns as AdvertiserCampaigns } from "./pages/advertiser/Campaigns";
+import { Analytics as AdvertiserAnalytics } from "./pages/advertiser/Analytics";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +55,31 @@ const App = () => (
               <ProtectedRoute role="affiliate">
                 <DashboardLayout>
                   <Wallet />
+                </DashboardLayout>
+              </ProtectedRoute>
+            } />
+
+            {/* Advertiser Routes */}
+            <Route path="/dashboard/advertiser/create" element={
+              <ProtectedRoute role="advertiser">
+                <DashboardLayout>
+                  <CreateCampaign />
+                </DashboardLayout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/dashboard/advertiser/campaigns" element={
+              <ProtectedRoute role="advertiser">
+                <DashboardLayout>
+                  <AdvertiserCampaigns />
+                </DashboardLayout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/dashboard/advertiser/analytics" element={
+              <ProtectedRoute role="advertiser">
+                <DashboardLayout>
+                  <AdvertiserAnalytics />
                 </DashboardLayout>
               </ProtectedRoute>
             } />

@@ -64,12 +64,15 @@ export type Database = {
       campaigns: {
         Row: {
           advertiser_id: string | null
+          approved_at: string | null
+          approved_by: string | null
           banner_url: string | null
           commission_type: string
           commission_value: number
           created_at: string | null
           description: string | null
           id: string
+          rejection_reason: string | null
           status: string | null
           title: string
           tracking_url: string
@@ -77,12 +80,15 @@ export type Database = {
         }
         Insert: {
           advertiser_id?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
           banner_url?: string | null
           commission_type: string
           commission_value: number
           created_at?: string | null
           description?: string | null
           id?: string
+          rejection_reason?: string | null
           status?: string | null
           title: string
           tracking_url: string
@@ -90,12 +96,15 @@ export type Database = {
         }
         Update: {
           advertiser_id?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
           banner_url?: string | null
           commission_type?: string
           commission_value?: number
           created_at?: string | null
           description?: string | null
           id?: string
+          rejection_reason?: string | null
           status?: string | null
           title?: string
           tracking_url?: string
@@ -105,6 +114,13 @@ export type Database = {
           {
             foreignKeyName: "campaigns_advertiser_id_fkey"
             columns: ["advertiser_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "campaigns_approved_by_fkey"
+            columns: ["approved_by"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -181,6 +197,110 @@ export type Database = {
           },
         ]
       }
+      fraud_alerts: {
+        Row: {
+          created_at: string | null
+          data: Json | null
+          description: string
+          entity_id: string
+          entity_type: string
+          id: string
+          resolved_at: string | null
+          resolved_by: string | null
+          severity: string | null
+          status: string | null
+          type: string
+        }
+        Insert: {
+          created_at?: string | null
+          data?: Json | null
+          description: string
+          entity_id: string
+          entity_type: string
+          id?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          severity?: string | null
+          status?: string | null
+          type: string
+        }
+        Update: {
+          created_at?: string | null
+          data?: Json | null
+          description?: string
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          severity?: string | null
+          status?: string | null
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fraud_alerts_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payout_requests: {
+        Row: {
+          affiliate_id: string | null
+          amount: number
+          id: string
+          method: string | null
+          payout_details: Json | null
+          processed_at: string | null
+          processed_by: string | null
+          requested_at: string | null
+          status: string | null
+          transaction_id: string | null
+        }
+        Insert: {
+          affiliate_id?: string | null
+          amount: number
+          id?: string
+          method?: string | null
+          payout_details?: Json | null
+          processed_at?: string | null
+          processed_by?: string | null
+          requested_at?: string | null
+          status?: string | null
+          transaction_id?: string | null
+        }
+        Update: {
+          affiliate_id?: string | null
+          amount?: number
+          id?: string
+          method?: string | null
+          payout_details?: Json | null
+          processed_at?: string | null
+          processed_by?: string | null
+          requested_at?: string | null
+          status?: string | null
+          transaction_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payout_requests_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payout_requests_processed_by_fkey"
+            columns: ["processed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -250,6 +370,61 @@ export type Database = {
           },
         ]
       }
+      user_suspensions: {
+        Row: {
+          id: string
+          is_active: boolean | null
+          lifted_at: string | null
+          lifted_by: string | null
+          reason: string
+          suspended_at: string | null
+          suspended_by: string | null
+          user_id: string | null
+        }
+        Insert: {
+          id?: string
+          is_active?: boolean | null
+          lifted_at?: string | null
+          lifted_by?: string | null
+          reason: string
+          suspended_at?: string | null
+          suspended_by?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          id?: string
+          is_active?: boolean | null
+          lifted_at?: string | null
+          lifted_by?: string | null
+          reason?: string
+          suspended_at?: string | null
+          suspended_by?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_suspensions_lifted_by_fkey"
+            columns: ["lifted_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_suspensions_suspended_by_fkey"
+            columns: ["suspended_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_suspensions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       wallet_transactions: {
         Row: {
           affiliate_id: string | null
@@ -296,9 +471,17 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      detect_suspicious_clicks: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       generate_ref_code: {
         Args: Record<PropertyKey, never>
         Returns: string
+      }
+      is_user_suspended: {
+        Args: { user_id: string }
+        Returns: boolean
       }
     }
     Enums: {
