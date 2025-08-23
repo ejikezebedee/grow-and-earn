@@ -16,6 +16,11 @@ import { Wallet } from "./pages/affiliate/Wallet";
 import { CreateCampaign } from "./pages/advertiser/CreateCampaign";
 import { Campaigns as AdvertiserCampaigns } from "./pages/advertiser/Campaigns";
 import { Analytics as AdvertiserAnalytics } from "./pages/advertiser/Analytics";
+import { Referrals } from "./pages/affiliate/Referrals";
+import { CampaignApprovals } from "./pages/admin/CampaignApprovals";
+import { UserManagement } from "./pages/admin/UserManagement";
+import { FraudDetection } from "./pages/admin/FraudDetection";
+import { PayoutManagement } from "./pages/admin/PayoutManagement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -51,6 +56,14 @@ const App = () => (
               </ProtectedRoute>
             } />
             
+            <Route path="/dashboard/referrals" element={
+              <ProtectedRoute role="affiliate">
+                <DashboardLayout>
+                  <Referrals />
+                </DashboardLayout>
+              </ProtectedRoute>
+            } />
+            
             <Route path="/dashboard/wallet" element={
               <ProtectedRoute role="affiliate">
                 <DashboardLayout>
@@ -80,6 +93,39 @@ const App = () => (
               <ProtectedRoute role="advertiser">
                 <DashboardLayout>
                   <AdvertiserAnalytics />
+                </DashboardLayout>
+              </ProtectedRoute>
+            } />
+
+            {/* Admin Routes */}
+            <Route path="/dashboard/admin/campaigns" element={
+              <ProtectedRoute role="admin">
+                <DashboardLayout>
+                  <CampaignApprovals />
+                </DashboardLayout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/dashboard/admin/users" element={
+              <ProtectedRoute role="admin">
+                <DashboardLayout>
+                  <UserManagement />
+                </DashboardLayout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/dashboard/admin/fraud" element={
+              <ProtectedRoute role="admin">
+                <DashboardLayout>
+                  <FraudDetection />
+                </DashboardLayout>
+              </ProtectedRoute>
+            } />
+
+            <Route path="/dashboard/admin/payouts" element={
+              <ProtectedRoute role="admin">
+                <DashboardLayout>
+                  <PayoutManagement />
                 </DashboardLayout>
               </ProtectedRoute>
             } />
