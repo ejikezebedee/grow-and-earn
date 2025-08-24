@@ -23,7 +23,10 @@ export const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
   }
 
   if (role && profile.role !== role) {
-    return <Navigate to="/dashboard" replace />;
+    // Allow admins to access all routes
+    if (profile.role !== 'admin') {
+      return <Navigate to="/dashboard" replace />;
+    }
   }
 
   return <>{children}</>;

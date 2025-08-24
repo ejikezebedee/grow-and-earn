@@ -5,6 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { supabase } from '@/integrations/supabase/client';
 import { Upload, X, File, Image as ImageIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
 interface FileUploadProps {
   onFileUploaded: (url: string) => void;
@@ -26,6 +27,7 @@ export const FileUpload = ({
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [preview, setPreview] = useState<string | null>(null);
+  const { toast } = useToast();
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
@@ -65,11 +67,15 @@ export const FileUpload = ({
 
     } catch (error: any) {
       console.error('Upload error:', error);
-      alert(error.message || 'Failed to upload file');
+      toast({
+        title: "Upload Error",
+        description: error.message || 'Failed to upload file',
+        variant: "destructive",
+      });
     } finally {
       setUploading(false);
     }
-  }, [bucket, path, onFileUploaded]);
+  }, [bucket, path, onFileUploaded, toast]);
 
   const { getRootProps, getInputProps, isDragActive, fileRejections } = useDropzone({
     onDrop,

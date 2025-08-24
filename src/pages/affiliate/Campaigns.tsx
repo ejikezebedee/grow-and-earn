@@ -70,8 +70,9 @@ export const Campaigns = () => {
 
   const joinCampaign = async (campaignId: string) => {
     try {
-      // Generate referral code
-      const refCode = Math.random().toString(36).substr(2, 8);
+      // Use the database function to generate referral code
+      const { data: refCodeData } = await supabase.rpc('generate_ref_code');
+      const refCode = refCodeData || Math.random().toString(36).substr(2, 8);
       
       const { error } = await supabase
         .from('referrals')
