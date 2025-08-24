@@ -90,12 +90,12 @@ const Help = () => {
   ];
 
   const popularArticles = [
-    "How to get started as an affiliate",
-    "Creating your first campaign",
-    "Understanding commission payments",
-    "Troubleshooting tracking issues",
-    "Best practices for campaign promotion",
-    "Account verification process"
+    { title: "How to get started as an affiliate", slug: "how-to-get-started-as-affiliate" },
+    { title: "Creating your first campaign", slug: "creating-your-first-campaign" },
+    { title: "Understanding commission payments", slug: "understanding-commission-payments" },
+    { title: "Troubleshooting tracking issues", slug: "troubleshooting-tracking-issues" },
+    { title: "Best practices for campaign promotion", slug: "best-practices-campaign-promotion" },
+    { title: "Account verification process", slug: "account-verification-process" }
   ];
 
   return (
@@ -171,11 +171,11 @@ const Help = () => {
               {popularArticles.map((article, index) => (
                 <Link
                   key={index}
-                  to="/help"
+                  to={`/blog/${article.slug}`}
                   className="p-4 rounded-lg border hover:border-primary hover:shadow-md transition-all group"
                 >
                   <span className="text-sm font-medium group-hover:text-primary transition-colors">
-                    {article}
+                    {article.title}
                   </span>
                 </Link>
               ))}
@@ -211,16 +211,29 @@ const Help = () => {
                     </CardHeader>
                     <CardContent className="pt-0">
                       <ul className="space-y-2">
-                        {category.articles.map((article, idx) => (
-                          <li key={idx}>
-                            <Link 
-                              to="/help"
-                              className="text-sm text-muted-foreground hover:text-primary transition-colors story-link"
-                            >
-                              {article}
-                            </Link>
-                          </li>
-                        ))}
+                        {category.articles.map((article, idx) => {
+                          // Map articles to help guide slugs
+                          const articleSlugMap: Record<string, string> = {
+                            "How to create your first campaign": "how-to-create-first-campaign",
+                            "Setting up your affiliate profile": "setting-up-affiliate-profile", 
+                            "Best practices for promoting campaigns": "best-practices-promoting-campaigns",
+                            "Two-factor authentication setup": "two-factor-authentication-setup"
+                          };
+                          
+                          const slug = articleSlugMap[article];
+                          const linkTo = slug ? `/help/${slug}` : "/help";
+                          
+                          return (
+                            <li key={idx}>
+                              <Link 
+                                to={linkTo}
+                                className="text-sm text-muted-foreground hover:text-primary transition-colors story-link"
+                              >
+                                {article}
+                              </Link>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </CardContent>
                   </Card>
