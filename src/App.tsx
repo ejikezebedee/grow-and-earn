@@ -13,6 +13,13 @@ import { Auth } from "./pages/Auth";
 import { Blog } from "./pages/Blog";
 import Pricing from "./pages/Pricing";
 import Help from "./pages/Help";
+import About from "./pages/About";
+import Careers from "./pages/Careers";
+import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import ApiDocs from "./pages/ApiDocs";
+import GettingStarted from "./pages/GettingStarted";
 import { Campaigns } from "./pages/affiliate/Campaigns";
 import { Wallet } from "./pages/affiliate/Wallet";
 import { CreateCampaign } from "./pages/advertiser/CreateCampaign";
@@ -41,6 +48,22 @@ const App = () => (
             <Route path="/blog/:slug" element={<Blog />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/help" element={<Help />} />
+            <Route path="/help/:slug" element={<Help />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/api-docs" element={<ApiDocs />} />
+            <Route path="/getting-started" element={<GettingStarted />} />
+            
+            {/* Public campaign browsing */}
+            <Route path="/campaigns" element={<Navigate to="/dashboard/campaigns" replace />} />
+            
+            {/* Dashboard aliases for footer links */}
+            <Route path="/dashboard/affiliate" element={<Navigate to="/dashboard/campaigns" replace />} />
+            <Route path="/dashboard/advertiser" element={<Navigate to="/dashboard/advertiser/campaigns" replace />} />
+            <Route path="/dashboard/analytics" element={<Navigate to="/auth" replace />} />
             
             {/* Dashboard Routes */}
             <Route path="/dashboard" element={

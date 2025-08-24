@@ -18,16 +18,16 @@ const Footer = () => {
               The most trusted affiliate marketing platform for growing your business and maximizing revenue.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://facebook.com/affiliatehub" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://twitter.com/affiliatehub" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://linkedin.com/company/affiliatehub" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://instagram.com/affiliatehub" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
             </div>
@@ -40,13 +40,13 @@ const Footer = () => {
               <Link to="/campaigns" className="text-muted-foreground hover:text-foreground transition-colors">
                 Browse Campaigns
               </Link>
-              <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link to="/dashboard/affiliate" className="text-muted-foreground hover:text-foreground transition-colors">
                 Affiliate Dashboard
               </Link>
-              <Link to="/advertiser" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link to="/dashboard/advertiser" className="text-muted-foreground hover:text-foreground transition-colors">
                 Advertiser Portal
               </Link>
-              <Link to="/analytics" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link to="/dashboard/analytics" className="text-muted-foreground hover:text-foreground transition-colors">
                 Analytics
               </Link>
             </nav>
@@ -65,7 +65,7 @@ const Footer = () => {
               <Link to="/api-docs" className="text-muted-foreground hover:text-foreground transition-colors">
                 API Documentation
               </Link>
-              <Link to="/guides" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link to="/getting-started" className="text-muted-foreground hover:text-foreground transition-colors">
                 Getting Started
               </Link>
             </nav>
@@ -95,14 +95,14 @@ const Footer = () => {
           <p className="text-muted-foreground text-sm">
             © 2024 AffiliateHub. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm">
-            <Link to="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
-              Terms of Service
-            </Link>
-            <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
-              Privacy Policy
-            </Link>
-          </div>
+            <div className="flex gap-6 text-sm">
+              <Link to="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
+                Terms of Service
+              </Link>
+              <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
+                Privacy Policy
+              </Link>
+            </div>
         </div>
       </div>
     </footer>
