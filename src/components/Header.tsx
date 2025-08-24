@@ -18,9 +18,6 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link to="/campaigns" className="text-foreground/70 hover:text-foreground transition-colors">
-            Campaigns
-          </Link>
           <Link to="/pricing" className="text-foreground/70 hover:text-foreground transition-colors">
             Pricing
           </Link>
@@ -35,11 +32,11 @@ const Header = () => {
         {/* Desktop Auth Buttons */}
         <div className="hidden md:flex items-center gap-4">
           <Button variant="ghost" asChild>
-            <Link to="/login">Login</Link>
+            <Link to="/auth">Login</Link>
           </Button>
-          <Link to="/auth" className="text-foreground/70 hover:text-foreground transition-colors">
-            Get Started
-          </Link>
+          <Button asChild>
+            <Link to="/auth">Get Started</Link>
+          </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -57,23 +54,34 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden border-t bg-background">
           <nav className="container py-4 flex flex-col gap-4">
-            <Link to="/campaigns" className="text-foreground/70 hover:text-foreground transition-colors">
-              Campaigns
-            </Link>
-            <Link to="/pricing" className="text-foreground/70 hover:text-foreground transition-colors">
+            <Link 
+              to="/pricing" 
+              className="text-foreground/70 hover:text-foreground transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Pricing
             </Link>
-            <Link to="/blog" className="text-foreground/70 hover:text-foreground transition-colors">
+            <Link 
+              to="/blog" 
+              className="text-foreground/70 hover:text-foreground transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Blog
             </Link>
-            <Link to="/help" className="text-foreground/70 hover:text-foreground transition-colors">
+            <Link 
+              to="/help" 
+              className="text-foreground/70 hover:text-foreground transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Help
             </Link>
             <div className="flex flex-col gap-2 pt-4 border-t">
               <Button variant="ghost" asChild>
-                <Link to="/login">Login</Link>
+                <Link to="/auth" onClick={() => setIsMenuOpen(false)}>Login</Link>
               </Button>
-              <Link to="/auth">Get Started</Link>
+              <Button asChild>
+                <Link to="/auth" onClick={() => setIsMenuOpen(false)}>Get Started</Link>
+              </Button>
             </div>
           </nav>
         </div>

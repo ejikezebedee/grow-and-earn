@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CTASection = () => {
   return (
@@ -25,16 +26,20 @@ const CTASection = () => {
               variant="secondary" 
               size="xl" 
               className="bg-white text-primary hover:bg-white/90 shadow-glow group"
+              asChild
             >
-              Join as Affiliate
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <Link to="/auth">
+                Join as Affiliate
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
             <Button 
               variant="outline" 
               size="xl" 
               className="border-white/30 text-white hover:bg-white/10 hover:text-white"
+              asChild
             >
-              Start Advertising
+              <Link to="/auth">Start Advertising</Link>
             </Button>
           </div>
 

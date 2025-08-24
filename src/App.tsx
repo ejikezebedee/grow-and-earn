@@ -11,6 +11,8 @@ import { Overview } from "@/components/dashboard/Overview";
 import Index from "./pages/Index";
 import { Auth } from "./pages/Auth";
 import { Blog } from "./pages/Blog";
+import Pricing from "./pages/Pricing";
+import Help from "./pages/Help";
 import { Campaigns } from "./pages/affiliate/Campaigns";
 import { Wallet } from "./pages/affiliate/Wallet";
 import { CreateCampaign } from "./pages/advertiser/CreateCampaign";
@@ -37,6 +39,8 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<Blog />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/help" element={<Help />} />
             
             {/* Dashboard Routes */}
             <Route path="/dashboard" element={
